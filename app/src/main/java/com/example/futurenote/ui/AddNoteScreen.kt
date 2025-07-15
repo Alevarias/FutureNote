@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,7 +34,8 @@ import com.example.futurenote.nav.BottomNavBar
 fun AddNoteScreen(navController: NavController) {
     val currentDestination = navController
         .currentBackStackEntryAsState().value?.destination?.route
-    var text by remember {mutableStateOf("")}
+    var noteTitle by remember {mutableStateOf("")}
+    var noteText by remember {mutableStateOf("")}
     val focusManager = LocalFocusManager.current
 
     Scaffold (
@@ -89,10 +91,14 @@ fun AddNoteScreen(navController: NavController) {
                     }
                 }
         ) {
-            Text("Add Future Note")
             OutlinedTextField(
-                value = text,
-                onValueChange = {text = it},
+                value = noteTitle,
+                onValueChange = {noteTitle = it},
+                label = {Text("I got Rained On")}
+            )
+            OutlinedTextField(
+                value = noteText,
+                onValueChange = {noteText = it},
                 label = {Text("Hey Future firstname, ")},
                 modifier = Modifier
                     .fillMaxWidth(),
