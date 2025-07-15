@@ -23,6 +23,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.futurenote.nav.BottomNavBar
 
@@ -32,6 +34,7 @@ fun AddNoteScreen(navController: NavController) {
     val currentDestination = navController
         .currentBackStackEntryAsState().value?.destination?.route
     var text by remember {mutableStateOf("")}
+    val focusManager = LocalFocusManager.current
 
     Scaffold (
         bottomBar = {
@@ -74,6 +77,17 @@ fun AddNoteScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
+                // Clears the focus whenever you're clicking outside of the TextFields.
+                .pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while(true) {
+                            val event = awaitPointerEvent()
+                            if(event.changes.any {it.pressed}) {
+                                focusManager.clearFocus()
+                            }
+                        }
+                    }
+                }
         ) {
             Text("Add Future Note")
             OutlinedTextField(
