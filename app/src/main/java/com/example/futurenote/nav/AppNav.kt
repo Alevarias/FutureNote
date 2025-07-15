@@ -39,7 +39,7 @@ fun AppNav() {
             }
         },
         floatingActionButton = {
-            if (currentRoute != "addNote") {
+            if (currentRoute != "addNote" && currentRoute != "settings") {
                 FloatingActionButton(onClick = {
                     navController.navigate("addNote") {
                         popUpTo(navController.graph.startDestinationId) {
