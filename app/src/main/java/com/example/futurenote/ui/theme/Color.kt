@@ -1,4 +1,4 @@
-package com.example.futurenote.theme
+package com.example.futurenote.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

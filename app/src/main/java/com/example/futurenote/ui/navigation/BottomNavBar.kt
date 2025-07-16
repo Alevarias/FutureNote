@@ -1,4 +1,4 @@
-package com.example.futurenote.nav
+package com.example.futurenote.ui.navigation
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable

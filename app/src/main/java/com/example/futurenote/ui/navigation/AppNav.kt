@@ -1,4 +1,4 @@
-package com.example.futurenote.nav
+package com.example.futurenote.ui.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -11,10 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.futurenote.ui.AddNoteScreen
-import com.example.futurenote.ui.ArchiveScreen
-import com.example.futurenote.ui.HomeScreen
-import com.example.futurenote.ui.SettingsScreen
+import com.example.futurenote.ui.screens.AddNoteScreen
+import com.example.futurenote.ui.screens.ArchiveScreen
+import com.example.futurenote.ui.screens.HomeScreen
+import com.example.futurenote.ui.screens.SettingsScreen
 import androidx.compose.material3.Icon
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.getValue
