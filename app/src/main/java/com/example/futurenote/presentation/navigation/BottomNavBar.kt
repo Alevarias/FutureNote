@@ -1,22 +1,24 @@
-package com.example.futurenote.ui.navigation
+package com.example.futurenote.presentation.navigation
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material3.Icon
+import com.example.futurenote.R
 
 @Composable
 fun BottomNavBar(navController: NavController) {
     val items = listOf(
-        NavItem("home", Icons.Default.Home, "Home"),
-        NavItem("archive", Icons.Default.Folder, "Archive"),
-        NavItem("settings", Icons.Default.Person, "Settings")
+        NavItem("home", Icons.Default.Home, stringResource(R.string.home_tab)),
+        NavItem("archive", Icons.Default.Folder, stringResource(R.string.archive_tab)),
+        NavItem("settings", Icons.Default.Person, stringResource(R.string.settings_tab))
     )
 
     NavigationBar {
@@ -25,7 +27,12 @@ fun BottomNavBar(navController: NavController) {
 
         items.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.label) },
+                icon = { 
+                    Icon(
+                        imageVector = item.icon, 
+                        contentDescription = "${item.label} tab"
+                    ) 
+                },
                 label = { Text(item.label) },
                 selected = currentRoute == item.route,
                 onClick = {

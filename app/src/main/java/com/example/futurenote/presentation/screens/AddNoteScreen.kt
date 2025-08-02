@@ -1,4 +1,4 @@
-package com.example.futurenote.ui.screens
+package com.example.futurenote.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.compose.foundation.layout.Row
@@ -23,19 +24,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.futurenote.presentation.viewmodel.NoteViewModel
+import com.example.futurenote.R
 
 @Composable
-
-fun AddNoteScreen(navController: NavController) {
+fun AddNoteScreen(navController: NavController, noteViewModel: NoteViewModel) {
     val currentDestination = navController
         .currentBackStackEntryAsState().value?.destination?.route
-    var noteTitle by remember {mutableStateOf("")}
-    var noteText by remember {mutableStateOf("")}
+    var noteTitle by remember { mutableStateOf("") }
+    var noteText by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
-    Scaffold (
+    Scaffold(
         bottomBar = {
-            // I don't think we need this if statement, but I'm keeping it for now
             if (currentDestination == "addNote") {
                 Row(
                     modifier = Modifier
@@ -45,25 +46,22 @@ fun AddNoteScreen(navController: NavController) {
                 ) {
                     OutlinedButton(
                         onClick = {
-                            navController.navigate("home") {
-                                popUpTo(navController.graph.startDestinationId) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
+                            navController.popBackStack()
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel_button))
                     }
                     OutlinedButton(
                         onClick = {
-
+                            if (noteTitle.isNotBlank() || noteText.isNotBlank()) {
+                                noteViewModel.addNote(noteTitle, noteText)
+                            }
+                            navController.popBackStack()
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        Text("Save")
+                        Text(stringResource(R.string.save_button))
                     }
                 }
             }
@@ -74,12 +72,11 @@ fun AddNoteScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
-                // Clears the focus whenever you're clicking outside of the TextFields.
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
-                        while(true) {
+                        while (true) {
                             val event = awaitPointerEvent()
-                            if(event.changes.any {it.pressed}) {
+                            if (event.changes.any { it.pressed }) {
                                 focusManager.clearFocus()
                             }
                         }
@@ -88,21 +85,23 @@ fun AddNoteScreen(navController: NavController) {
         ) {
             OutlinedTextField(
                 value = noteTitle,
-                onValueChange = {noteTitle = it},
-                label = {Text("I got Rained On")}
+                onValueChange = { noteTitle = it },
+                label = { Text(stringResource(R.string.note_title_label)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
             )
             OutlinedTextField(
                 value = noteText,
-                onValueChange = {noteText = it},
-                label = {Text("Hey Future firstname, ")},
+                onValueChange = { noteText = it },
+                label = { Text(stringResource(R.string.note_content_label)) },
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 maxLines = Int.MAX_VALUE,
                 minLines = 5,
                 singleLine = false
-
             )
-
         }
     }
 }

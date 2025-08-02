@@ -1,4 +1,4 @@
-package com.example.futurenote.ui.theme
+package com.example.futurenote.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

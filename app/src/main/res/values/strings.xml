@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">FutureNote</string>
+    
+    <!-- Navigation -->
+    <string name="home_tab">Home</string>
+    <string name="archive_tab">Archive</string>
+    <string name="settings_tab">Settings</string>
+    <string name="add_note">Add Note</string>
+    
+    <!-- Add Note Screen -->
+    <string name="note_title_label">Note Title</string>
+    <string name="note_content_label">Note Content</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="save_button">Save</string>
+    
+    <!-- Archive Screen -->
+    <string name="archive_title">All Notes</string>
+    <string name="no_notes_available">No notes available</string>
+    <string name="error_loading_notes">Error loading notes: %1$s</string>
+    
+    <!-- Home Screen -->
+    <string name="no_notes_message">No notes yet</string>
+    <string name="tap_add_note_message">Tap the + button to create your first note</string>
+    <string name="untitled_note">Untitled Note</string>
+    <string name="delete_note">Delete note</string>
+    
+    <!-- Content Descriptions -->
+    <string name="add_note_fab">Add new note</string>
+    <string name="home_tab_description">Home tab</string>
+    <string name="archive_tab_description">Archive tab</string>
+    <string name="settings_tab_description">Settings tab</string>
 </resources>

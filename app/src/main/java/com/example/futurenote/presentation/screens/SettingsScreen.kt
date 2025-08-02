@@ -1,4 +1,4 @@
-package com.example.futurenote.ui.screens
+package com.example.futurenote.presentation.screens
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
